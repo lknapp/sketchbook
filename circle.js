@@ -9,19 +9,28 @@ function setup() {
 
 function draw() {
   frame += 1;
-  var saturationOscillation = Math.sin(frame/21) * 34 + 55;
-  var blackOscillation = Math.cos(frame/89) * 13 + 89;
-  fill((frame/8.0) % 100, saturationOscillation, blackOscillation);
+  drawRotatingEllipse(1440048, 1);
+  drawRotatingEllipse(8039, 1);
+  drawRotatingEllipse(13, -1);
+  drawRotatingEllipse(20000, -1);
+}
 
-  var taurusRadius = screen.width / 5;
-  var ellipseRadius = Math.sin(frame/89)*144 + 233;
+function drawRotatingEllipse(offset, direction) {
+  var saturationOscillation = Math.sin((frame + offset)/21) * 34 + 55;
+  var blackOscillation = Math.cos((frame + offset)/89) * 13 + 89;
+  fill(((frame + offset)/8.0) % 100, saturationOscillation, blackOscillation, 5);
 
-  var wobbleAmplitude = Math.sin(frame/55)*screen.width/13;
+  var taurusRadius = window.innerWidth / 5;
+  var ellipseRadius = Math.sin((frame + offset)/89)*144 + 233;
 
-  var panRate = -Math.cos(frame/34)*screen.width / 8;
+  var wobbleAmplitude = Math.sin((frame + offset)/55)*window.innerWidth/13;
 
-  var xpos = Math.sin(frame/50)*taurusRadius + screen.width / 3 + wobbleAmplitude + panRate;
-  var ypos = Math.cos(frame/50)*taurusRadius + screen.width / 3 + wobbleAmplitude;
+  var panRate = -Math.cos((frame + offset)/34)*window.innerWidth / 8;
+
+  var xpos = Math.sin((direction*(frame + offset))/50)*taurusRadius + window.innerWidth / 3 + wobbleAmplitude + panRate;
+  var ypos = Math.cos((direction*(frame + offset))/50)*taurusRadius + window.innerHeight / 3 + wobbleAmplitude;
 
   ellipse(xpos, ypos, ellipseRadius, ellipseRadius);
 }
+
+
