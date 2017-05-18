@@ -6,7 +6,7 @@ var detectMouseCollision,
 
 
 function setup() {
-  createCanvas(screen.width, screen.height);
+  createCanvas(window.screen.width, window.screen.height);
   frame = 0;
   colorMode(HSB, 100);
   noStroke();
