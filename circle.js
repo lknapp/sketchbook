@@ -21,7 +21,7 @@ function draw() {
 }
 
 function drawWhiteCursor(frame) {
-  var opacityOscillation = Math.cos(frame/89) + 1;
+  var opacityOscillation = Math.cos(frame/89)*0.5 + 1.5;
   fill(100, 0, 100, opacityOscillation);
   var ellipseRadius = (Math.sin(frame/89)*144 + 233)/5;
   ellipse(mouseX, mouseY, ellipseRadius, ellipseRadius);
