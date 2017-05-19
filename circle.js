@@ -1,8 +1,8 @@
 var detectMouseCollision,
     mouseX, mouseY,
     frame, ellipseMode, RADIUS,
-    drawWhiteCursor,
-    createCanvas, screen, colorMode, noStroke, HSB, setup, draw, drawRotatingEllipse, fill, window, ellipse;
+    drawWhiteCursor, initDist,
+    createCanvas, screen, colorMode, noStroke, HSB, setup, draw, drawRotatingEllipse, fill, window, ellipse, Planet, planetOne, planetTwo;
 
 
 function setup() {
@@ -11,46 +11,69 @@ function setup() {
   colorMode(HSB, 100);
   noStroke();
   ellipseMode(RADIUS);
+
+  initDist = 50;
+  planetOne = new Planet(1, window.screen.width / 2 + initDist, window.screen.height / 2 + initDist);
+  planetTwo = new Planet(-1, window.screen.width / 2 - initDist, window.screen.height / 2 - initDist);
 }
 
 function draw() {
   frame += 1;
-  drawRotatingEllipse(frame, 1440048, 1);
-  drawRotatingEllipse(frame, 20000, -1);
-  drawWhiteCursor(frame);
+  planetOne.collide(planetTwo);
+  planetTwo.collide(planetOne);
+
+  planetOne.advance();
+  planetTwo.advance();
+
+  planetOne.draw();
+  planetTwo.draw();
 }
 
-function drawWhiteCursor(frame) {
-  var opacityOscillation = Math.cos(frame/89)*0.5 + 1.5;
-  fill(100, 0, 100, opacityOscillation);
-  var ellipseRadius = (Math.sin(frame/89)*144 + 233)/5;
-  ellipse(mouseX, mouseY, ellipseRadius, ellipseRadius);
+
+function Planet(direction, xpos, ypos) {
+  this.seed = Math.floor(Math.random() * 1000000);
+  this.xpos = xpos;
+  this.ypos = ypos;
+  this.direction = direction;
+  this.taurusRadius = window.innerWidth / 5;
+
+  this.advance = function() {
+    this.seed += 1;
+    this.saturation = Math.sin((this.seed)/144) * 34 + 55;
+    this.value = Math.cos((this.seed)/89) * 13 + 89;
+    this.radius = (Math.sin((this.seed)/89)*144 + 233)/2;
+    // add centrifical force
+    this.xvel = Math.cos(this.direction*this.seed/50)*3;
+    this.yvel = -Math.sin(this.direction*this.seed/50)*3;
+    this.xpos = this.xpos + this.xvel;
+    this.ypos = this.ypos + this.yvel;
+  };
+
+  this.draw = function() {
+    console.log(this.xpos);
+    console.log(this.ypos);
+    fill((this.seed/21) % 100, this.saturation, this.value, 15);
+    ellipse(this.xpos, this.ypos, this.radius, this.radius);
+    //if(!detectMouseCollision(this.radius, this.xpos, this.ypos)) {}
+  };
+
+  this.collide = function(planet) {
+    var xdist = Math.abs(this.xpos - planet.xpos);
+    var ydist = Math.abs(this.ypos - planet.ypos);
+    var absdist = Math.sqrt(Math.abs(Math.pow(xdist, 2) + Math.pow(ydist, 2)));
+    var colliding = absdist < this.radius + planet.radius;
+    if(colliding){
+      this.direction = -this.direction;
+    }
+  };
+
 }
 
-function drawRotatingEllipse(frame, offset, direction) {
-  var saturationOscillation = Math.sin((frame + offset)/21) * 34 + 55;
-  var blackOscillation = Math.cos((frame + offset)/89) * 13 + 89;
-  fill(((frame + offset)/8.0) % 100, saturationOscillation, blackOscillation, 5);
 
-  var taurusRadius = window.innerWidth / 5;
-  var ellipseRadius = (Math.sin((frame + offset)/89)*144 + 233)/2;
-
-  var wobbleAmplitude = Math.sin((frame + offset)/55)*window.innerWidth/13;
-
-  var panRate = -Math.cos((frame + offset)/34)*window.innerWidth / 8;
-
-  var xpos = Math.sin((direction*(frame + offset))/50)*taurusRadius + window.innerWidth / 3 + wobbleAmplitude + panRate;
-  var ypos = Math.cos((direction*(frame + offset))/50)*taurusRadius + window.innerHeight / 3 + wobbleAmplitude;
-
-  if(!detectMouseCollision(ellipseRadius, xpos, ypos)) {
-    ellipse(xpos, ypos, ellipseRadius, ellipseRadius);
-  }
-}
-
-function detectMouseCollision(ellipseRadius, xpos, ypos) {
+function detectMouseCollision(radius, xpos, ypos) {
  var xdist = Math.abs(xpos - mouseX);
  var ydist = Math.abs(ypos - mouseY);
- var absdist = Math.sqrt(Math.abs(Math.pow(xdist, 2) + Math.pow(ydist, 2) - Math.pow(ellipseRadius, 2)));
- var colliding = absdist < ellipseRadius;
+ var absdist = Math.sqrt(Math.abs(Math.pow(xdist, 2) + Math.pow(ydist, 2) - Math.pow(radius, 2)));
+ var colliding = absdist < radius;
  return colliding;
 }
