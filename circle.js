@@ -6,15 +6,15 @@ var detectMouseCollision,
 
 
 function setup() {
-  createCanvas(window.screen.width, window.screen.height);
+  createCanvas(window.innerWidth, window.innerHeight);
   frame = 0;
   colorMode(HSB, 100);
   noStroke();
   ellipseMode(RADIUS);
 
   initDist = 50;
-  planetOne = new Planet(1, window.screen.width / 2 + initDist, window.screen.height / 2 + initDist);
-  planetTwo = new Planet(-1, window.screen.width / 2 - initDist, window.screen.height / 2 - initDist);
+  planetOne = new Planet(1, window.innerWidth / 2 + initDist, window.innerHeight / 2 + initDist);
+  planetTwo = new Planet(-1, window.innerWidth / 2 - initDist, window.innerHeight / 2 - initDist);
 }
 
 function draw() {
@@ -42,19 +42,19 @@ function Planet(direction, xpos, ypos) {
     this.saturation = Math.sin((this.seed)/144) * 34 + 55;
     this.value = Math.cos((this.seed)/89) * 13 + 89;
     this.radius = (Math.sin((this.seed)/89)*144 + 233)/2;
-    // add centrifical force
-    this.xvel = Math.cos(this.direction*this.seed/50)*3;
-    this.yvel = -Math.sin(this.direction*this.seed/50)*3;
+
+    this.xaccel = (this.xpos - window.innerWidth) / (window.innerWidth*3);
+    this.yaccel = (this.ypos - window.innerHeight) / (window.innerHeight*3);
+
+    this.xvel = Math.cos(this.direction*this.seed/50)*3 + this.xaccel;
+    this.yvel = -Math.sin(this.direction*this.seed/50)*3 + this.yaccel;
     this.xpos = this.xpos + this.xvel;
     this.ypos = this.ypos + this.yvel;
   };
 
   this.draw = function() {
-    console.log(this.xpos);
-    console.log(this.ypos);
     fill((this.seed/21) % 100, this.saturation, this.value, 15);
     ellipse(this.xpos, this.ypos, this.radius, this.radius);
-    //if(!detectMouseCollision(this.radius, this.xpos, this.ypos)) {}
   };
 
   this.collide = function(planet) {
