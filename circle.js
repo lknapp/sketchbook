@@ -1,13 +1,12 @@
 var detectMouseCollision,
-    mouseX, mouseY, mouseIsPressed, clickOn,
-    frame, ellipseMode, RADIUS, planetThree,
-    drawWhiteCursor, initDist,
+    mouseX, mouseY, mouseIsPressed, clickOn, rect, drawStars,
+    ellipseMode, RADIUS, planetThree, drawBackground, Star,
+    drawWhiteCursor, initDist, height, width, makeStars, stars,
     createCanvas, screen, colorMode, noStroke, HSB, setup, draw, drawRotatingEllipse, fill, window, ellipse, Planet, planetOne, planetTwo;
 
 
 function setup() {
   createCanvas(window.innerWidth, window.innerHeight);
-  frame = 0;
   colorMode(HSB, 100);
   noStroke();
   ellipseMode(RADIUS);
@@ -16,10 +15,12 @@ function setup() {
   planetOne = new Planet(1, window.innerWidth / 2 + initDist, window.innerHeight / 2 + initDist, 0.01, 0.01);
   planetTwo = new Planet(-1, window.innerWidth / 2 - initDist, window.innerHeight / 2 - initDist, 0.01, -0.01);
   planetThree = new Planet(-1, window.innerWidth / 2 - initDist, window.innerHeight / 2 + initDist, -0.01, -0.01);
+
+  stars = makeStars(8);
 }
 
 function draw() {
-  frame += 1;
+  drawBackground();
   planetOne.collide(planetTwo);
   planetOne.collide(planetThree);
   planetTwo.collide(planetOne);
@@ -35,9 +36,43 @@ function draw() {
   planetTwo.draw();
   planetThree.draw();
 
-  clickOn(planetOne);
+  stars.forEach(function(star) {
+    star.advance();
+    star.draw();
+  });
+
 }
 
+function makeStars(quantity) {
+  var starArray = [];
+  var i;
+  for (i = 0; i < quantity; i ++) {
+    starArray.push(new Star(width * Math.random(), height * Math.random(), 3));
+  }
+  return starArray;
+}
+
+function drawBackground() {
+  fill(100, 0, 0, 1);
+  rect(0, 0, width, height);
+}
+
+function Star(xpos, ypos, vel) {
+  this.xpos = xpos;
+  this.ypos= ypos;
+  this.vel = vel;
+
+  this.advance = function() {
+    this.xpos = (this.xpos + this.vel) % width;
+    this.ypos = (this.ypos + this.vel) % height;
+  };
+
+  this.draw = function() {
+    fill(100, 0, 100);
+    ellipse(this.xpos, this.ypos, 1, 1);
+  };
+  return this;
+}
 
 function Planet(direction, xpos, ypos, xvel, yvel) {
   this.seed = Math.floor(Math.random() * 1000000);
@@ -65,7 +100,7 @@ function Planet(direction, xpos, ypos, xvel, yvel) {
   };
 
   this.draw = function() {
-    fill((this.seed/21) % 100, this.saturation, this.value, 34);
+    fill((this.seed/21) % 100, this.saturation, this.value);
     ellipse(this.xpos, this.ypos, this.radius, this.radius);
   };
 
