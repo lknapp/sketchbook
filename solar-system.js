@@ -18,13 +18,13 @@ function draw() {
   collidePlanets(planets);
 
   stars.forEach(function(star) {
-    star.advance();
     star.draw();
+    star.advance();
   });
 
   planets.forEach(function(planet) {
-    planet.advance();
     planet.draw();
+    planet.advance();
   });
 }
 
@@ -49,7 +49,7 @@ function collidePlanets(planets) {
       planets[j].collide(planets[i]);
     }
   }
-}
+};
 
 function makeStars(quantity) {
   var starArray = [];
@@ -58,25 +58,10 @@ function makeStars(quantity) {
     starArray.push(new Star(width * Math.random(), height * Math.random(), 3));
   }
   return starArray;
-}
+};
 
 function drawBackground() {
   fill(100, 0, 0, 3);
   noStroke();
   rect(0, 0, width, height);
-}
-
-function clickOn(planet) {
-  if(mouseIsPressed) {
-    planet.xpos = mouseX;
-    planet.ypos = mouseY;
-  }
-}
-
-function detectMouseCollision(radius, xpos, ypos) {
- var xdist = Math.abs(xpos - mouseX);
- var ydist = Math.abs(ypos - mouseY);
- var absdist = Math.sqrt(Math.abs(Math.pow(xdist, 2) + Math.pow(ydist, 2) - Math.pow(radius, 2)));
- var colliding = absdist < radius;
- return colliding;
-}
+};

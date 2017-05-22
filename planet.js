@@ -23,10 +23,22 @@ function Planet(direction, xpos, ypos, xvel, yvel) {
     this.ypos = this.ypos + this.yvel;
   };
 
+  this.hovering = function() {
+   var xdist = Math.abs(this.xpos - mouseX);
+   var ydist = Math.abs(this.ypos - mouseY);
+   var centerdist = Math.sqrt(Math.pow(xdist, 2) + Math.pow(ydist, 2));
+   return centerdist < this.radius;
+  };
+
   this.draw = function() {
     strokeWeight(5);
     stroke((this.seed/21) % 100, this.saturation, this.value);
-    noFill();
+
+    if(this.hovering()) {
+      fill((this.seed/21) % 100, this.saturation, this.value);
+    } else {
+      noFill();
+    }
     ellipse(this.xpos, this.ypos, this.radius, this.radius);
   };
 
