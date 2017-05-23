@@ -52,6 +52,8 @@ function Planet(direction, xpos, ypos, xvel, yvel) {
       this.yvel = this.yvel * -1;
       this.xaccel = this.accel * -1;
       this.yaccel = this.accel * -1;
+      fill((this.seed/21) % 100, this.saturation, this.value);
+      ellipse(this.xpos, this.ypos, this.radius, this.radius);
     }
   };
 
