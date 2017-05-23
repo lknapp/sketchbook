@@ -8,6 +8,7 @@ function setup() {
   createCanvas(window.innerWidth, window.innerHeight);
   colorMode(HSB, 100);
   ellipseMode(RADIUS);
+  background(100, 0, 0);
 
   planets = makePlanets();
   stars = makeStars(8);

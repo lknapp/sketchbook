@@ -49,17 +49,13 @@ function Pod() {
   this.pg.background(100, 0, 0);
   this.pg.noStroke();
   this.seed = Math.random() * 1000;
-  this.flickerRate = ceil(Math.random() * 4) * 60;
 
   this.draw = function(frame) {
-
-    if((frame % (4*60)) < this.flickerRate) {
-      this.pg.fill((frame / 5 + this.seed) % 100, 70, 90);
-      this.pg.rect(10, 10, 180, 180);
-      ambientMaterial(250);
-      texture(this.pg);
-      box(200);
-    }
+    this.pg.fill((frame / 5 + this.seed) % 100, 70, 90);
+    this.pg.rect(10, 10, 180, 180);
+    ambientMaterial(250);
+    texture(this.pg);
+    box(200);
   }
 
   return this;
