@@ -1,0 +1,23 @@
+html,
+body {
+  margin: 0;
+  height: 100%;
+  padding: 0;
+}
+#map {
+  position: fixed;
+  z-index: 0;
+  height: 100%;
+}
+#title {
+  font-family: 'Open Sans';
+  font-size: 3rem;
+  font-style: bold;
+  position: fixed;
+  left: 10%;
+  top: 10%;
+  z-index: 1;
+}
+img {
+  width: 200px;
+}
