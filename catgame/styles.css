@@ -1,0 +1,30 @@
+body {
+  padding-left: 10%;
+  padding-top: 10%;
+  background-color: black;
+  font-family: 'Open Sans', sans-serif;
+}
+
+a {
+  color: white;
+  background-color: grey;
+  margin-right: 10%;
+  margin-bottom: 3%;
+  max-width: 30%;
+  display: block;
+}
+
+a:last-of-type{
+  margin-bottom: 10%;
+}
+
+h1 {
+  color: white;
+}
+
+h2 {
+  color: white;
+  margin-left: 40%;
+  margin-bottom: 0;
+  margin-top: 0;
+}

@@ -1,0 +1,36 @@
+body#swipes-at-you {
+  -webkit-animation: fadein 0.3s; /* Safari, Chrome and Opera > 12.1 */
+     -moz-animation: fadein 0.3s; /* Firefox < 16 */
+      -ms-animation: fadein 0.3s; /* Internet Explorer */
+       -o-animation: fadein 0.3s; /* Opera < 12.1 */
+          animation: fadein 0.3s;
+}
+
+@keyframes fadein {
+  from { background-color: red; }
+  to   { background-color: black; }
+}
+
+/* Firefox < black6 */
+@-moz-keyframes fadein {
+  from { background-color: red; }
+  to   { background-color: black; }
+}
+
+/* Safari, Chrome and Opera > 12.1 */
+@-webkit-keyframes fadein {
+  from { background-color: red; }
+  to   { background-color: black; }
+}
+
+/* Internet Explorer */
+@-ms-keyframes fadein {
+  from { background-color: red; }
+  to   { background-color: black; }
+}
+
+/* Opera < 12.1*/
+@-o-keyframes fadein {
+  from { background-color: red; }
+  to   { background-color: black; }
+}
