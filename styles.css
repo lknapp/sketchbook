@@ -4,6 +4,9 @@
   top: 5rem;
   font-family: "Open Sans";
 }
+body {
+  background: grey;
+}
 
 @media (max-width: 600px) {
   #navigation {
