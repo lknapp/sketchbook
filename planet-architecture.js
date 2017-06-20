@@ -20,7 +20,6 @@ function draw() {
     planet.advance();
   });
 
-  console.log(mod);
   if (mod%500 == 1) {
     background(100, 0, 0);
   }
