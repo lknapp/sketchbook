@@ -7,6 +7,17 @@ img {
   width: 300px;
 }
 
+img.biscuit {
+  width: 350px;
+  -webkit-animation:spin 14s linear infinite;
+  -moz-animation:spin 14s linear infinite;
+  animation:spin 14s linear infinite;
+}
+
+@-moz-keyframes spin { 100% { -moz-transform: rotate(-360deg); } }
+@-webkit-keyframes spin { 100% { -webkit-transform: rotate(-360deg); } }
+@keyframes spin { 100% { -webkit-transform: rotate(-360deg); transform:rotate(-360deg); } }
+
 .blue:hover {
   border-radius: 15px;
   border: 5px solid blue;
