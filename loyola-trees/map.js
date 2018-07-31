@@ -4,23 +4,26 @@ infoWindows = [];
 markers = [];
 
 createContent = (tree) => {
-  return "<div>TREE INFO</div>";
+  console.log(tree);
+  return "<div>" + tree.Species + "</div>";
 }
 
 function initMap() {
 
   markerIcon = {
       path: google.maps.SymbolPath.CIRCLE,
-      scale: 10,
+      scale: 3,
       strokeColor: 'green',
-      strokeWeight: 3
+      strokeWeight: 1
   };
 
   hoveredMarkerIcon = {
       path: google.maps.SymbolPath.CIRCLE,
-      scale: 10,
+      scale: 3,
       fillOpacity: 1.0,
-      strokeWeight: 3
+      fillColor: 'green',
+      strokeWeight: 1,
+      strokeColor: 'green'
   };
 
   map = new google.maps.Map(document.getElementById('map'), {
@@ -47,7 +50,7 @@ function initMap() {
     });
 
     markers[i] = new google.maps.Marker({
-      position: { lat: tree.lat, lng: tree.lng },
+      position: { lat: parseFloat(tree.lat.substring(1)), lng: parseFloat(tree.lng.substring(1)) },
       map: map,
       icon: markerIcon,
       active: false
