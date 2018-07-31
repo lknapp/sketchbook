@@ -3,7 +3,7 @@ var map, hoveredMarkerIcon, markerIcon, infoWindows, markers, styles, createCont
 infoWindows = [];
 markers = [];
 
-createContent = (bird) => {
+createContent = (tree) => {
   return "<div>TREE INFO</div>";
 }
 
@@ -24,7 +24,7 @@ function initMap() {
   };
 
   map = new google.maps.Map(document.getElementById('map'), {
-    center: { lat: 41.886817, lng: -87.626264 },
+    center: { lat: 42.0093739, lng: -87.6543734},
     zoom: 16,
     mapTypeControl: false,
     zoomControl: false,
@@ -35,24 +35,20 @@ function initMap() {
 
   styles = [
     {
-      stylers: [{ saturation: -100 }]
-    },
-    {
       featureType: "all",
       elementType: "labels",
       stylers: [{ visibility: "off" }]
     }
   ];
 
-  birds.forEach((bird, i) => {
+  trees.forEach((tree, i) => {
     infoWindows[i] = new google.maps.InfoWindow({
-      content: createContent(bird)
+      content: createContent(tree)
     });
 
     markers[i] = new google.maps.Marker({
-      position: { lat: bird.lat, lng: bird.lng },
+      position: { lat: tree.lat, lng: tree.lng },
       map: map,
-      title: bird.species,
       icon: markerIcon,
       active: false
     });

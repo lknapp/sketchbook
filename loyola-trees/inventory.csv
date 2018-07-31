@@ -1,4 +1,4 @@
-#,"Genus, Species, Cultivar/ Variety (if applicable); or Common Name",GPS/Latitude,GPS/Longitude,DBH,Height,Crown Condition,Trunk Condition,Root Condition,Notes & Prunings
+Number, Species,lat,lng,dbh,height,Crown Condition,Trunk Condition,Root Condition,Notes
 1,Siberian Elm (Ulmus pumila),N42.003864,W-87.657552,"26.7""",40',4,3,4,2 trunks
 2,Siberian Elm (Ulmus pumila),N42.003827,W-87.657528,"10.3""",28',4,4,3,
 3,Siberian Elm (Ulmus pumila),N42.003860,W-87.657382,"14.9""",28',4,2,1,2 trunks-diverge at base
@@ -162,4 +162,4 @@
 161,"Maple (Acer x ""Freemanii ?)",N42.007319,W-87.659113,"3.2""",13',4,4,4,Planted in 2016. 
 161B,Elm (Ulmus 'Princeton'),N42.007234,W-87.659143,"10""",16',4,4,4,"Planted in 2016. When tree was planted, thick bands were left on the tree."
 162,Honey locust (Gladitsia triacanthos),N42.007339,W-87.659088,"27.7""",45',2,3,2,
-163,Honey locust (Gladitsia triacanthos),N42.007374,W-87.659210,"29.6""",42',2,1,3,Leaning. Epicormic shoots. Peeling bark. Many dead branches.
+163,Honey locust (Gladitsia triacanthos),N42.007374,W-87.659210,"29.6""",42',2,1,3,Leaning. Epicormic shoots. Peeling bark. Many dead branches.  "
